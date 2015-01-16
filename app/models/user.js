@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var crypto = require('crypto');
+var config = require('../config');
 
 var userSchema = mongoose.Schema({
   username: String,
@@ -10,11 +11,11 @@ var userSchema = mongoose.Schema({
 });
 
 userSchema.statics.hashPassword = function(input) {
-  input += process.env.SALT;
+  input += config.salt;
   var shasum = crypto.createHash('sha512');
   shasum.update(input);
   return shasum.digest('hex');
-}
+};
 
 userSchema.methods.validPassword = function(checkPassword) {
   return (User.hashPassword(checkPassword) === this.password);
