@@ -15,8 +15,7 @@ var NewsItem = require('./models/news');
 var User = require('./models/user');
 
 // DB CONNECTION
-var CONNECTION_STRING = config.databaseURI;
-mongoose.connect(CONNECTION_STRING);
+mongoose.connect(config.database_uri);
 
 // MIDDLEWARE
 app.use(express.static('./public'));
